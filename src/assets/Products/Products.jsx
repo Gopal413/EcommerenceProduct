@@ -549,7 +549,7 @@ function Products() {
   const limit =4;
   const offset =(page-1) * limit;
   useEffect(() => {
-     fetch(`http://localhost:3000/products`)
+     fetch("db.json")
       .then((res) => res.json())
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
