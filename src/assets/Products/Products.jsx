@@ -549,10 +549,10 @@ function Products() {
   const limit =4;
   const offset =(page-1) * limit;
   useEffect(() => {
-     fetch("db.json")
+     fetch("./db.json")
       .then((res) => res.json())
       .then((data) => {
-        const list = Array.isArray(data) ? data : [];
+        const list = Array.isArray(data.products) ? data.products : [];
         //console.log("onlydata",data)
         setProducts(list);
         setCategories([...new Set(list.map((p) => p.category))]);
