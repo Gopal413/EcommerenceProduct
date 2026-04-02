@@ -238,10 +238,14 @@
 
 // export default SideNavBar;
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { ProductContext } from "../UserContext/ProductProvider";
 
 function SideNavBar() {
+   const {cartItems } = useContext(ProductContext);
+  const totalcart = cartItems?.length || 0;
+
   const [expandedSections, setExpandedSections] = useState({
     dashboard: false,
     orders: false,
@@ -334,31 +338,36 @@ function SideNavBar() {
         </div>
 
         {/* Orders */}
-        <div className="group">
-          <button
-            onClick={() => toggleSection("orders")}
-            className="w-full flex items-center justify-between px-2 py-2 rounded-xl hover:bg-gray-800/70 transition-all duration-200"
-          >
-            <NavLink
-                to="/addtocart"
-                className="block py-1 text-xs text-gray-300 hover:text-white"
-                onClick={ensureExpanded}
-              >
-            <span className="flex items-center">
-              <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
-                📦
-              </div>
-              <span
-                className={`text-sm font-medium text-gray-100 transition-all duration-200 ${labelClass}`}
-              >
-                Orders
-              </span>
-            </span>
-            </NavLink>
-          </button>
+      <div className="group">
+  <NavLink
+    to={totalcart>0 ? "/addtocart" :"/noproduct"}
+    onClick={() => {
+      toggleSection("orders");
+      ensureExpanded();
+    }}
+    className="w-full flex items-center gap-2 px-2 py-2 rounded-xl hover:bg-gray-800/70 transition-all duration-200"
+  >
+    {/* icon + badge */}
+    <div className="relative">
+      <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center">
+        📦
+      </div>
 
-          
-        </div>
+      {totalcart > 0 && (
+        <span className="absolute -top-1 -right-1 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-[10px] px-1.5 py-0.5 min-w-[18px] border border-slate-900">
+          {totalcart}
+        </span>
+      )}
+    </div>
+
+    {/* label */}
+    <span
+      className={`text-sm font-medium text-gray-100 transition-all duration-200 ${labelClass}`}
+    >
+      Orders
+    </span>
+  </NavLink>
+</div>
 
         {/* Products */}
         <div className="group">
@@ -367,7 +376,7 @@ function SideNavBar() {
             className="w-full flex items-center justify-between px-2 py-2 rounded-xl hover:bg-gray-800/70 transition-all duration-200"
           >
             <NavLink
-                to="/"
+                to="/product"
                 className="block py-1 text-xs text-gray-300 hover:text-white"
                 onClick={ensureExpanded}
               >
@@ -391,7 +400,7 @@ function SideNavBar() {
 
         {/* Simple links */}
         <NavLink
-          to="/customers"
+          to="/"
           className={({ isActive }) =>
             `
             flex items-center px-2 py-2 rounded-xl mt-2 transition-all duration-200
@@ -413,7 +422,7 @@ function SideNavBar() {
         </NavLink>
 
         <NavLink
-          to="/analytics"
+          to="/"
           className={({ isActive }) =>
             `
             flex items-center px-2 py-2 rounded-xl transition-all duration-200

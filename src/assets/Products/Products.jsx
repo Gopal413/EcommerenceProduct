@@ -499,7 +499,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProductContext } from "../UserContext/ProductProvider";
 import Pagination from "../Pagination/Pagination";
 
 
@@ -541,9 +540,9 @@ function Products() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("");
-  const { addToCart, cartItems } = useContext(ProductContext);
+  
   const [page,setpage] = useState(1)
-  const totalcart = cartItems?.length || 0;
+  //const totalcart = cartItems?.length || 0;
   const tokenid = localStorage.getItem("token_id");
   
   const limit =4;
@@ -652,27 +651,7 @@ function Products() {
                   + Add Product
                 </NavLink>
               </motion.div>
-            ) : (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
-                className="relative inline-block"
-              >
-                <NavLink
-                  to="/addtocart"
-                  className="inline-flex items-center gap-1 px-3 md:px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-xs md:text-sm font-semibold text-white shadow-md"
-                >
-                  <span className="hidden md:inline">Add to Cart</span>
-                  <span className="md:hidden">Cart</span>
-                </NavLink>
-
-                {totalcart > 0 && (
-                  <span className="absolute -top-2 -right-2 inline-flex items-center justify-center rounded-full bg-red-500 text-white text-[10px] px-1.5 py-0.5 min-w-[18px] border border-slate-900">
-                    {totalcart}
-                  </span>
-                )}
-              </motion.div>
-            )}
+            ) :null}
           </div>
         </div>
       </motion.header>
@@ -719,6 +698,7 @@ function Products() {
                   whileTap={{ scale: 0.98 }}
                   className="flex flex-col bg-slate-900/80 rounded-2xl border border-slate-800 shadow-md overflow-hidden transition-all duration-200"
                 >
+                  <NavLink to={`/product/${product.id}`} state={{product}}>
                   <motion.img
                     src={product.images?.[0]}
                     alt={product.name}
@@ -741,19 +721,14 @@ function Products() {
                     </p>
                     <p className="text-[11px] text-slate-400 mb-3">
                       {product.inStock === "true" || product.inStock === true
-                        ? "In Stock"
-                        : "Out of Stock"}
+                        ? "Out of Stock"
+                        : "In Stock"}
                     </p>
 
-                    <motion.button
-                      onClick={() => addToCart({ ...product })}
-                      whileTap={{ scale: 0.96 }}
-                      className="mt-auto w-full bg-blue-600 text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 transition"
-                    >
-                      Add to Cart
-                    </motion.button>
+                    
                     
                   </div>
+                  </NavLink>
                 </motion.div>
               ))}
               <Pagination page={page} setpage ={setpage} hasmore ={filteredProducts.length === limit}/>
