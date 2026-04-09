@@ -3,30 +3,8 @@ import React from 'react'
 function Pagination({page,setpage,hasmore}) {
  
   return (
-    // <div className="flex items-center gap-2 text-sm mt-4">
-    //   <button
-    //     onClick={() => setpage((p) => Math.max(1, p - 1))}
-    //     disabled={page === 1}
-    //     className="px-3 py-1 border rounded disabled:opacity-50"
-    //   >
-    //     Prev
-    //   </button>
-
-    //   <span>
-    //     Page {page}
-    //   </span>
-
-    //   <button
-    //     onClick={() => setpage((p) => p + 1)}
-    //     disabled={!hasmore}
-    //     className="px-3 py-1 border rounded disabled:opacity-50"
-    //   >
-    //     Next
-    //   </button>
-    // </div>
-
+    
     <div className="mt-10  flex items-end justify-center gap-1 text-sm">
-  {/* Prev */}
   <button
     onClick={() => setpage((p) => Math.max(1, p - 1))}
     disabled={page === 1}
@@ -48,12 +26,10 @@ function Pagination({page,setpage,hasmore}) {
     Prev
   </button>
 
-  {/* Current page indicator */}
   <span className="px-3 py-1.5 text-sm text-slate-100 bg-slate-800/60 border border-slate-700 rounded-lg">
     Page {page}
   </span>
 
-  {/* Next */}
   <button
     onClick={() => setpage((p) => p + 1)}
     disabled={!hasmore}

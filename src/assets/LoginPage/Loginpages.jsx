@@ -25,7 +25,7 @@ function Loginpages() {
             settoken("1")
             navigate("/")
         } 
-        else if (forminp.username === "prime@gmail.com" && forminp.password === "prime123" ){
+        else if (forminp.username === "gopal@gmail.com" && forminp.password === "gopal@123" ){
             console.log("welcome to Prime page")
             //token =localStorage.setItem("token_id","2");
             settoken("2")
@@ -53,17 +53,7 @@ function Loginpages() {
     console.log("username",forminp.username)
 
   return (
-    // <div>
-    //     <h1>Login Pages</h1>
-    //     <form onSubmit={Handleform}>
-    //         <label htmlFor="username">UserName :</label>
-    //         <input type="email" value={forminp.username} onChange={Handleinput} name="username"/><br />
-    //         <label htmlFor="password">Password :</label>
-    //         <input type="password" value={forminp.password} onChange={Handleinput} name="password" /><br />
-    //         <button type='submit'>Submit</button>
-    //     </form>
-      
-    // </div>
+    
 
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 px-4">
       {/* Card */}

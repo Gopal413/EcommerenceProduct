@@ -1,73 +1,3 @@
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import Products from './Products'
-// import {nanoid} from "nanoid"
-
-// function AddProduct() {
-
-//     const navigate = useNavigate()
-//     const [newProduct,setnewproduct] = useState({
-//       id: nanoid(),
-//       name:null,
-//       category :null,
-//       price:null,
-//       currency: "USD",
-//       stock: "92",
-//       rating: "4.8",
-//       reviews: "567",
-//       description: "Ultra-fast portable solid state drive with USB-C connection and 1TB storage.",
-//       specifications: {
-//         brand: "DataSpeed",
-//         capacity: "1TB",
-//         readSpeed: "1050 MB/s",
-//         writeSpeed: "1000 MB/s",
-//         connectivity: "USB-C 3.2"
-//       },
-//       images: [
-//         "https://example.com/images/ssd-1.jpg"
-//       ],
-//       inStock: "true",
-//       discount: "15"
-//     })
-    
-//     const newproductfun =(e)=>{
-//         setnewproduct({...newProduct,[e.target.name]:e.target.value})
-//     }
-
-//     const productnewfun =(e)=>{
-//         e.preventDefault();
-//         try{
-//         const res = fetch("http://localhost:3000/products",{
-//             method:'POST',
-//             headers:{'Contect-Type':'application/json'},
-//             body:JSON.stringify(newProduct)
-//         })        
-//         // const productlist = res.json();
-//         console.log("addproduct :",res)
-//         navigate("/")
-//     }
-//     catch(err){
-//         console.log("error",err.message)
-//     }
-//     }
-
-//   return (
-//     <div>
-       
-//         <div>
-//             <form onSubmit={productnewfun}>
-//                 <input type="text" name="name" onChange={newproductfun} placeholder='enter name' />
-//                 <input type="text" name="category" onChange={newproductfun} placeholder='enter category' />
-//                 <input type="text" name="price" onChange={newproductfun} placeholder='enter price' />
-//                 <button type='submit'>submit</button>
-//             </form>
-//         </div>
-      
-//     </div>
-//   )
-// }
-
-// export default AddProduct
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate,Link } from 'react-router-dom';
@@ -93,7 +23,7 @@ function AddProduct() {
   const [imageUrls, setImageUrls] = useState('');
   const navigate = useNavigate();
 
-  // Category definitions matching your JSON
+
   useEffect(() => {
     setCategories([
       { name: 'Electronics', fields: ['brand', 'color', 'connectivity', 'batteryLife'] },
@@ -104,7 +34,7 @@ function AddProduct() {
     ]);
   }, []);
 
-  // Update fields when category changes
+ 
   useEffect(() => {
     if (selectedCategory) {
       const category = categories.find(cat => cat.name === selectedCategory);
@@ -225,7 +155,6 @@ function AddProduct() {
               </select>
             </div>
 
-            {/* Specifications - Dynamic by Category */}
             {categoryFields.length > 0 && (
               <div className="p-8 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl border-2 border-indigo-200 shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
@@ -251,7 +180,6 @@ function AddProduct() {
               </div>
             )}
 
-            {/* Additional Fields */}
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-3">Stock Quantity</label>
@@ -304,7 +232,6 @@ function AddProduct() {
               />
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-6 px-8 rounded-3xl text-xl font-bold shadow-2xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
